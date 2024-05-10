@@ -1,0 +1,16 @@
+name: Build Listing
+
+on: 
+  workflow_dispatch:
+
+jobs:
+
+  build:
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build listing
+      uses: killers0992/scpsl.pluginlisting@master
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
