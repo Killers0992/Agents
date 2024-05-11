@@ -14,11 +14,18 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    env:
-      releasePath: "${{ github.workspace }}"
     steps:
     - name: Checkout main repository.
       uses: actions/checkout@v4
+    - name: Get Release Info
+      id: release-info
+      uses: zoexx/github-action-json-file-properties@b9f36ce6ee6fe2680cd3c32b2c62e22eade7e590
+      with: 
+          file_path: "${{ github.workspace }}/releaseInfo.json"
+    - name: Set Environment Variables
+      run: |
+        echo "version=${{ steps.release-info.outputs.version }}" >> $GITHUB_ENV
+        echo "publicizeAssemblies=${{ steps.release-info.outputs.publicizedAssemblies }}" >> $GITHUB_ENV
     - name: Download depot downloader
       shell: pwsh
       run: |
@@ -34,7 +41,7 @@ jobs:
     - name: Publicize Assemblies
       uses: killers0992/scpsl.assemblypublicizer@master
       with:
-        assemblies: 'Assembly-CSharp.dll'
+        assemblies: ${{ env.publicizedAssemblies }}
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
@@ -46,14 +53,6 @@ jobs:
       with:
         name: Agents
         path: ${{ github.workspace }}/Agents/bin/Release/net48/Agents.dll
-    - name: Get Release Info
-      id: release-info
-      uses: zoexx/github-action-json-file-properties@b9f36ce6ee6fe2680cd3c32b2c62e22eade7e590
-      with: 
-          file_path: "${{ env.releasePath }}/releaseInfo.json"
-    - name: Set Environment Variables
-      run: |
-        echo "version=${{ steps.release-info.outputs.version }}" >> $GITHUB_ENV
     - name: Create Tag
       id: tag_version
       uses: mathieudutour/github-tag-action@v6.1
@@ -66,5 +65,5 @@ jobs:
       with:
         files: |
           ${{ github.workspace }}/Agents/bin/Release/net48/Agents.dll
-          ${{ env.releasePath }}/releaseInfo.json
+          ${{ github.workspace }}/releaseInfo.json
         tag_name: ${{ env.version }}
