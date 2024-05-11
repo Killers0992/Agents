@@ -6,5 +6,5 @@
   "version": "1.0.0",
   "scpslVersion": "13.4.2",
   "loaderType": "nwapi",
-  "publicizedAssemblies": "Assembly-CSharp.dll",
+  "publicizedAssemblies": "Assembly-CSharp.dll"
 }
