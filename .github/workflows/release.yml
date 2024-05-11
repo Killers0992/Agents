@@ -29,7 +29,7 @@ jobs:
       uses: killers0992/scpsl.downloadfiles@master
       with:
         branch: 'public'
-        filestodownload: ${{ env.gameAssemblyReferences }}
+        filesToDownload: ${{ env.gameAssemblyReferences }}
     - name: Publicize Assemblies
       uses: killers0992/scpsl.assemblypublicizer@master
       with:
