@@ -1,7 +1,7 @@
 {
   "displayname": "Agents",
   "description": "Fake players which can move around map.",
-  "author": "Killers0992",
+  "authorName": "Killers0992",
   "buildType": 0,
   "version": "1.0.0",
   "scpslVersion": "13.4.2",
