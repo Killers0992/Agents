@@ -31,16 +31,10 @@ jobs:
         chmod 777 ${{ github.workspace }}/DepotDownloader/DepotDownloader
         chmod 777 ${{ github.workspace }}/References
         ${{ github.workspace }}/DepotDownloader/DepotDownloader -app 996560 -os windows -dir "${{ github.workspace }}/References" -filelist "${{ github.workspace }}/download-files.txt"
-    - name: Download APublicizer
-      shell: pwsh
-      run: |
-        New-Item -ItemType Directory -Force -Path ${{ github.workspace }}/APublicizer
-        Invoke-WebRequest -Uri "https://github.com/iRebbok/APublicizer/releases/download/${{ env.A_PUBLICIZER_VERSION }}/native-linux-x64-release.tar.gz" -OutFile "${{ github.workspace }}/apub.tar.gz"
-        Expand-Archive -Path ${{ github.workspace }}\apub.tar.gz -PassThru -DestinationPath ${{ github.workspace }}/APublicizer
     - name: Publicize Assemblies
-      run: |
-        chmod 777 ${{ github.workspace }}/APublicizer
-        ${{ github.workspace }}/APublicizer/APublicizer "${{ env.SL_REFERENCES }}/Assembly-CSharp.dll"
+      uses: killers0992/scpsl.assemblypublicizer@master
+      with:
+        assemblies: 'Assembly-CSharp.dll'
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
