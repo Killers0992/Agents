@@ -44,7 +44,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release
     - name: Upload
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Agents
         path: ${{ github.workspace }}${{ env.PROJECT_NAME }}/bin/Release/${{ env.NET_FRAMEWORK_VERSION }}/${{ env.ASESEMBLY_NAME }}.dll
