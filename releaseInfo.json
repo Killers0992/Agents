@@ -3,7 +3,7 @@
   "description": "Fake players which can move around map.",
   "authorName": "Killers0992",
   "buildType": 0,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scpslVersion": "14.2.0",
   "loaderType": "nwapi",
   "gameAssemblyReferences": "Mirror.dll,Pooling.dll,PluginAPI.dll,Assembly-CSharp.dll,CommandSystem.Core.dll,UnityEngine.AIModule.dll,UnityEngine.CoreModule.dll,UnityEngine.PhysicsModule.dll,UnityEngine.TerrainModule.dll",
